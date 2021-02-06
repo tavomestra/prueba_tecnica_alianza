@@ -1,0 +1,223 @@
+    <div class="row mt-2">
+        <div class="col-md-12 mb-2">
+            <button              
+              type="button"
+              class="btn btn-info btn-rounded btn-sm mr-3"   
+              (click) = "newClient()"           
+            >
+              <i class="fa fa-plus mr-2"></i> New
+            </button>
+            <button              
+              type="button"
+              class="btn btn-info btn-rounded btn-sm mr-3"   
+              (click) = "export()"           
+            >
+              <i class="fa fa-download mr-2"></i> Export
+            </button>
+          </div>
+    </div>
+    <div class="row">
+       <div class="col">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter shared key" 
+            aria-label="Enter shared key" aria-describedby="basic-addon2" #sharedKey>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button"
+              (click) = "getClientByShredKey(sharedKey.value)"
+              >Search</button>
+            </div>
+          </div>
+       </div>
+       <div class="col">
+        <button        
+        type="button"
+        class="btn btn-info btn-rounded btn-sm mr-3"    
+        data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"          
+      >
+        <i class="fa fa-search mr-2"></i> Advanced Search
+      </button>
+       </div>
+    </div>
+
+    <!--Form busqueda avanza-->
+    <div class="collapse" id="collapseExample">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card border-primary mt-3">
+            <div class="card-header">Advance search</div>
+            <div class="card-body">      
+              <form [formGroup]="form" autocomplete="off">                
+                  <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"
+                      id="name"
+                      formControlName="name"
+                      [ngClass]="{
+                          'is-invalid':
+                            formulario['name'].errors &&
+                            (formulario['name'].dirty || submitted)
+                        }"
+                      />           
+                      <span class="invalid-feedback">
+                        <span *ngIf="formulario['name'].errors?.required">
+                          Campo obligatorio
+                        </span>
+                      </span>
+                    </div>
+                    
+                  </div>
+    
+                  <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"
+                      id="email"
+                      formControlName="email"
+                      [ngClass]="{
+                          'is-invalid':
+                            formulario['email'].errors &&
+                            (formulario['email'].dirty || submitted)
+                        }"
+                      />           
+                      <span class="invalid-feedback">
+                        <span *ngIf="formulario['email'].errors?.required">
+                          Campo obligatorio
+                        </span>
+                        <span *ngIf="formulario['email'].errors?.pattern">
+                          Email inválido
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-sm-10">
+                    <input class="form-control" type="text"
+                    id="phone"
+                    formControlName="phone"
+                    [ngClass]="{
+                        'is-invalid':
+                          formulario['phone'].errors &&
+                          (formulario['phone'].dirty || submitted)
+                      }"
+                    />           
+                    <span class="invalid-feedback">
+                      <span *ngIf="formulario['phone'].errors?.required">
+                        Campo obligatorio
+                      </span>
+                      <span *ngIf="formulario['phone'].errors?.pattern">
+                        Solo números de 10 digitos
+                      </span>
+                    </span>
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
+                    <div class="col-sm-10">
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        name="startDate"
+                        formControlName="startDate"
+                        ngbDatepicker
+                        #d1="ngbDatepicker"                    
+                       
+                      />
+                      <div class="input-group-append">
+                        <button
+                          id="btnFechaInicial"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="d1.toggle()"
+                          type="button"
+                          title="Seleccionar fecha"
+                        >
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                     
+                    </div>
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
+                    <div class="col-sm-10">
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        name="endDate"
+                        formControlName="endDate"
+                        ngbDatepicker
+                        #d2="ngbDatepicker"                    
+                      
+                      />
+                      <div class="input-group-append">
+                        <button
+                          id="btnFechaFinal"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="d2.toggle()"
+                          type="button"
+                          title="Seleccionar fecha"
+                        >
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                   
+                    </div>
+                    </div>
+                  </div>
+                
+                  <div class="form-group row">
+                  <div class="col-md-12 text-right">
+                    <button
+                      id="btn_buscar"
+                      type="submit"
+                      class="btn btn-primary btn-rounded btn-sm mr-3"   
+                      (click) = "advanceSearch()"               
+                    >
+                      <i class="fa fa-search mr-2"></i> Search
+                    </button>
+                   
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <!--Fin form busqueda avazanda-->
+    <br>
+    <h4>Clients</h4>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Shared Key</th>
+                <th scope="col">Business ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Date Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf = "listClientes.length == 0">
+                  <td colspan="5"class="text-center"> Data not found </td>
+              </tr>
+              <tr *ngFor="let item of listClientes">
+                <td>{{ item.sharedKey }}</td>
+                <td>{{ item.businessId }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.startDate }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>    
+

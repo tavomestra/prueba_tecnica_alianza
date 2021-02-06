@@ -1,0 +1,168 @@
+  <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="card border-primary mt-3">
+            <div class="card-header">Crear New Client</div>
+            <div class="card-body">      
+              <form [formGroup]="form" autocomplete="off">
+                
+                  <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" type="text"
+                    id="name"
+                    formControlName="name"
+                    [ngClass]="{
+                        'is-invalid':
+                          formulario['name'].errors &&
+                          (formulario['name'].dirty || submitted)
+                      }"
+                    />           
+                    <span class="invalid-feedback">
+                      <span *ngIf="formulario['name'].errors?.required">
+                        Campo obligatorio
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" type="text"
+                    id="email"
+                    formControlName="email"
+                    [ngClass]="{
+                        'is-invalid':
+                          formulario['email'].errors &&
+                          (formulario['email'].dirty || submitted)
+                      }"
+                    />           
+                    <span class="invalid-feedback">
+                      <span *ngIf="formulario['email'].errors?.required">
+                        Campo obligatorio
+                      </span>
+                      <span *ngIf="formulario['email'].errors?.pattern">
+                        Email inválido
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input class="form-control" type="text"
+                    id="phone"
+                    formControlName="phone"
+                    [ngClass]="{
+                        'is-invalid':
+                          formulario['phone'].errors &&
+                          (formulario['phone'].dirty || submitted)
+                      }"
+                    />           
+                    <span class="invalid-feedback">
+                      <span *ngIf="formulario['phone'].errors?.required">
+                        Campo obligatorio
+                      </span>
+                      <span *ngIf="formulario['phone'].errors?.pattern">
+                        Solo números de 10 digitos
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        name="startDate"
+                        formControlName="startDate"
+                        ngbDatepicker
+                        #d1="ngbDatepicker"
+                        (ngModelChange)="validarFechas()"
+                        [ngClass]="{
+                          'is-invalid':
+                            formulario['startDate'].errors &&
+                            (submitted || formulario['startDate'].dirty)
+                        }"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          id="btnFechaFinal"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="d1.toggle()"
+                          type="button"
+                          title="Seleccionar fecha"
+                        >
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                      <div class="invalid-feedback">
+                        <span *ngIf="formulario['startDate'].errors?.required">
+                          Campo obligatorio
+                        </span>
+                        <span *ngIf="formulario['startDate'].errors?.outRange1">
+                          {{ formulario["startDate"].errors?.outRange1 }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        name="endDate"
+                        formControlName="endDate"
+                        ngbDatepicker
+                        #d2="ngbDatepicker"
+                        (ngModelChange)="validarFechas()"
+                        [ngClass]="{
+                          'is-invalid':
+                            formulario['endDate'].errors &&
+                            (submitted || formulario['endDate'].dirty)
+                        }"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          id="btnFechaFinal"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="d2.toggle()"
+                          type="button"
+                          title="Seleccionar fecha"
+                        >
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                      <div class="invalid-feedback">
+                        <span *ngIf="formulario['endDate'].errors?.required">
+                          Campo obligatorio
+                        </span>
+                        <span *ngIf="formulario['endDate'].errors?.outRange1">
+                          {{ formulario["endDate"].errors?.outRange1 }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <button
+                      id="btn_buscar"
+                      type="submit"
+                      class="btn btn-primary btn-rounded btn-sm mr-3"
+                      (click) = "create()"
+                    >
+                      <i class="fa fa-plus mr-2"></i> Create
+                    </button>
+                   
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-4"></div>
+  </div>
+  
+  
+  
